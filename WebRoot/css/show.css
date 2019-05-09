@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+.show-content{
+	
+	position:fixed;
+	z-index:10;
+	width:auto;
+	height:auto;
+	margin-left: 10%;
+	margin-top: 5%;
+	
+	
+}
+.show-content .title{
+	width: 100%;
+	text-align: center;
+	
+}
+.show-content h2{
+	
+	margin-left: 10%;
+	margin-bottom: 2%;
+	
+}

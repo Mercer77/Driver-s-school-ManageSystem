@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- 配置Spring -->
+	<constant name="struts.objectFactory" value="spring"></constant>
+	
+	
+	<package name="user" extends="struts-default">
+	<!-- 注册 -->
+		<action name="registerAction" class="action.UserAction" method="register">
+			<result name="success" >/index.jsp</result>
+			<result name="input" >/register.jsp</result>
+		</action>
+	<!-- 登录 -->
+		<action name="loginAction" class="action.UserAction" method="login">
+			<result name="success" >/home.jsp</result>
+			<result name="input" >/index.jsp</result>
+		</action>
+		
+	</package>
+	
+<!-- 学员 -->	
+	<package name="students" extends="struts-default">
+	<!-- 添加学员 -->
+		<action	name="studentsAction" class="action.StudentsAction" method="add">           
+			<interceptor-ref name="fileUpload">               
+		 		   <param name="allowedTypes">  
+                      image/bmp,image/png,image/gif,image/jpeg,image/jpg,application/msword,text/plain  
+                   </param> 
+		 		<param name="maximumSize">200000000</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"/> 
+			<result name="success">/showstud.jsp</result>
+			<result name="input">/signuppage.jsp</result>
+		</action>
+	<!-- 删除学员 -->
+		<action name="deleteStudents" class="action.StudentsAction" method="delete">
+			<result name="success">/showstud.jsp</result>
+		</action>
+	<!-- 更新学员 -->
+		<action name="updateStudents" class="action.StudentsAction" method="update">
+			<result name="success">/showstud.jsp</result>
+		</action>
+	</package>
+	
+	
+<!-- 教练 -->	
+	<package name="coaches" extends="struts-default">
+	<!-- 添加教练 -->
+		<action	name="addCoaches" class="action.CoachesAction" method="add">           
+			<interceptor-ref name="fileUpload">               
+		 		   <param name="allowedTypes">  
+                      image/bmp,image/png,image/gif,image/jpeg,image/jpg,application/msword,text/plain  
+                   </param> 
+		 		<param name="maximumSize">2000000000</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"/> 
+			<result name="success">/showcoach.jsp</result>
+			<result name="input">/addcoach.jsp</result>
+		</action>
+	<!-- 删除教练 -->
+		<action name="deleteCoaches" class="action.CoachesAction" method="delete">
+			<result name="success">/showcoach.jsp</result>
+		</action>
+	<!-- 更新教练 -->
+		<action name="updateCoaches" class="action.CoachesAction" method="update">
+			<result name="success">/showcoach.jsp</result>
+		</action>
+	</package>
+	
+<!-- 考试预约 -->
+	<package name="ordertest" extends="struts-default">
+		<!-- 添加考试信息 -->
+		<action name="addOrder" class="action.OrderTestAction" method="add">
+			<result name="success">/showorder.jsp</result>
+			<result name="input">/order.jsp</result>
+		</action>
+		<!-- 删除考试信息 -->
+		<action name="deleteOrder" class="action.OrderTestAction" method="delete">
+			<result name="success">/showorder.jsp</result>
+		</action>
+		<!-- 更新考试信息 -->
+		<action name="updateOrder" class="action.OrderTestAction" method="update">
+			<result name="success">/showorder.jsp</result>
+		</action>			
+	</package>	
+<!-- 车辆分配 -->
+	<package name="traincar" extends="struts-default">
+		<!-- 添加分配信息 -->
+		<action name="addTrainCar" class="action.TrainCarAction" method="add">
+			<result name="success">/showtraincar.jsp</result>
+			<result name="input">/showtraincar.jsp</result>
+		</action>
+	   <!-- 更新分配信息 -->
+		<action name="updateTrainCar" class="action.TrainCarAction" method="update">
+			<result name="success">/showtraincar.jsp</result>
+		</action>
+	   <!-- 删除分配信息 -->
+		<action name="deleteTrainCar" class="action.TrainCarAction" method="delete">
+			<result name="success">/showtraincar.jsp</result>
+		</action>
+	</package>
+</struts>    

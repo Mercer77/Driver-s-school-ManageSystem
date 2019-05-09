@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd ">
+
+<!-- accountsdao对象设置  注入sessionFactory -->
+	<bean id="accountsDao" class="dao.AccountsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+<!-- studentsdao对象设置  注入sessionFactory -->
+	<bean id="studentsDao" class="dao.StudentsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+<!-- coachesdao对象设置  注入sessionFactory -->
+	<bean id="coachesDao" class="dao.CoachesDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+<!-- ordertestdao对象设置  注入sessionFactory -->
+	<bean id="ordertestDao" class="dao.OrderTestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+<!-- traincartdao对象设置  注入sessionFactory -->
+	<bean id="traincarDao" class="dao.TrainCarDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>	
+<!-- cartdao对象设置  注入sessionFactory -->
+	<bean id="carDao" class="dao.CarDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>	
+		
+	
+<!-- accountsService对象设置  注入accountsdao -->
+	<bean id="accountsService" class="service.AccountsServiceImpl">
+		<property name="accountsDao" ref="accountsDao"></property>
+	</bean>
+<!-- studentsService对象设置  注入studentsdao -->
+	<bean id="studentsService" class="service.StudentsServiceImpl">
+		<property name="studentsDao" ref="studentsDao"></property>
+	</bean>
+<!-- coachesService对象设置  注入coachesdao -->
+	<bean id="coachesService" class="service.CoachesServiceImpl">
+		<property name="coachesDao" ref="coachesDao"></property>
+	</bean>
+<!-- ordertestService对象设置  注入ordertestdao -->
+	<bean id="ordertestService" class="service.OrderTestServiceImpl">
+		<property name="ordertestDao" ref="ordertestDao"></property>
+	</bean>	
+<!-- traincarService对象设置  注入traincartdao -->
+	<bean id="trainCarService" class="service.TrainCarServiceImpl">
+		<property name="traincarDao" ref="traincarDao"></property>
+	</bean>		
+<!-- carService对象设置  注入cartdao -->
+	<bean id="carService" class="service.CarServiceImpl">
+		<property name="carDao" ref="carDao"></property>
+	</bean>			
+	
+<!-- 在UserStruts里面的配置  注入accountsService -->
+	<bean id="userAction" scope="prototype" class="action.UserAction">
+		<property name="accountsService" ref="accountsService"></property>
+	</bean>
+<!-- 在StudentsStruts里面的配置  注入studentsService  coachesService-->
+	<bean id="StudentsAction" scope="prototype" class="action.StudentsAction">
+		<property name="studentsService" ref="studentsService"></property>
+		<property name="coachesService" ref="coachesService"></property>
+	</bean>
+<!-- 在CoachesStruts里面的配置  注入coachesService -->
+	<bean id="CoachesAction" scope="prototype" class="action.CoachesAction">
+		<property name="coachesService" ref="coachesService"></property>
+	</bean>
+<!-- 在OrderTestStruts里面的配置  注入ordertestService studentsService -->
+	<bean id="OrderTestAction" scope="prototype" class="action.OrderTestAction">
+		<property name="ordertestService" ref="ordertestService"></property>
+		<property name="studentsService" ref="studentsService"></property>
+	</bean>	
+<!-- 在traincarStruts里面的配置  注入traincarService studentsService -->
+	<bean id="TrainCarAction" scope="prototype" class="action.TrainCarAction">
+		<property name="trainCarService" ref="trainCarService"></property>
+		<property name="coachesService" ref="coachesService"></property>
+		<property name="carService" ref="carService"></property>
+	</bean>	
+	
+		
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url" value="jdbc:mysql://localhost:3306/jxgl?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123456"></property>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.autoReconnect">true</prop> 
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>entity/Accounts.hbm.xml</value>
+				<value>entity/Jxstudents.hbm.xml</value>
+				<value>entity/Car.hbm.xml</value>
+				<value>entity/Coaches.hbm.xml</value>
+				<value>entity/Ordertest.hbm.xml</value>
+				<value>entity/Traincar.hbm.xml</value>
+			</list>
+		</property>
+
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 配置切点 -->
+	 <aop:config>
+        <aop:pointcut id="cut" expression="execution(* service.*.*(..))" />  
+        <aop:advisor pointcut-ref="cut" advice-ref="txAdvice" />  
+     </aop:config>
+	
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	  <tx:attributes>
+	   <tx:method name="get*" read-only="false" propagation="REQUIRED"/>
+	   <tx:method name="find*" read-only="false" propagation="REQUIRED"/>
+	   <tx:method name="save*" read-only="false" propagation="REQUIRED"/> 
+	   <tx:method name="update*" read-only="false" propagation="REQUIRED"/> 
+	   <tx:method name="delete*" propagation="REQUIRED"/>
+	  </tx:attributes>
+ 	</tx:advice>
+	
+	</beans>

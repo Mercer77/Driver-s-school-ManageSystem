@@ -1,0 +1,215 @@
+@charset "utf-8";
+
+/* CSS Reset */
+html,body{color:#000; font-family:Microsoft YaHei, Tahoma, Helvetica, SimSun, sans-serif; font-size:20px;height: 775px;}
+html,body,form,input,select,textarea,div,p,h1,h2,h3,h4,h5,h6,p,ul,ol,li,form,img,dl,dt,dd,table,th,td,blockquote,fieldset,div,strong,label,em{margin:0; padding:0; }
+ul,li,dl,dt,dd{list-style:none; }
+h1{font-size:28px; }
+h2{font-size:22px; }
+h3{font-size:17px; }
+h4{font-size:14px; }
+small{font-size:12px; }
+ul,ol{list-style:none; }
+i{margin-right:4px; color:#f00;}
+em{font-style:normal; }
+a{text-decoration:none; outline:none; blr:expression(this.onFocus=this.blur()); }
+a:hover{text-decoration:none; }
+sup{vertical-align:text-top; }
+sub{vertical-align:text-bottom; }
+fieldset,img{border:0; }
+button,input,select,textarea{font-size:100%; }
+q:before,q:after{content:''; }
+body{min-width:1600px;}
+ins{font-family:Microsoft YaHei,Helvetica,Tahoma; font-style:normal; text-decoration:none}
+table{
+	border-collapse:collapse;
+	border-spacing:1
+}
+input{outline: none;border: none;}
+a[class $= "btn"]:hover{filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;}
+
+/* = 分页
+------------------------------------------ */
+.page {
+    height: 30px;
+    width: 250px;
+    margin: 30px auto;
+    *zoom: 1;
+}
+.page:before,
+.page:after {
+    display: table;
+    content: "";
+}
+.page:after {
+    clear:both;
+}
+.page a,
+.page span {
+    float: left;
+    text-align: center;
+    margin: 0 2px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    color: #4c4c4c;
+}
+.page a:hover{
+    text-decoration: none;
+    background-color: #eee;
+}
+.page .current {
+	height: 20px;
+	line-height: 20px;
+	background-color: #ff7f54;
+}
+.page .rows {
+	display: none;
+}
+.page .first {
+    background: url("../images/first.png") no-repeat 0.5px 2px;
+    background-size: 19px 16px;
+    margin-right: 16px;
+}
+.page .prev {
+    background: url("../images/prev.png") no-repeat 5px 2px;
+    background-size: 10px 16px;
+    margin-right: 10px;
+}
+.page .next {
+    background: url("../images/next.png") no-repeat 5px 2px;
+    background-size: 10px 16px;
+    margin-left: 10px;
+}
+.page .end {
+    background: url("../images/last.png") no-repeat 0.5px 2px;
+    background-size: 19px 16px;
+    margin-left: 16px;
+}
+.button {
+	padding: 0 20px;
+	height: 44px;
+	line-height: 44px;
+	margin: 13px 30px 13px 0;
+	font-size: 18px;
+	letter-spacing: 2px;
+	float: right;
+	background-color: transparent;
+	color: #fff;
+	border: 1px solid #fff;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+img {
+	border: none;
+}
+
+* {
+	font-family: '微软雅黑';
+	font-size: 12px;
+	color: #626262;
+}
+
+dl, dt, dd {
+	display: block;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+#bg {
+	background-image: url(../images/content/dotted.png);
+}
+
+.container {
+	width: auto;
+	height: 90%;
+	margin: auto;
+	float: left;
+}
+
+/*left*/
+.leftsidebar_box {
+	width: 160px;
+	height: auto !important;
+	overflow: visible !important;
+	position: fixed;
+	height: 100% !important;
+	background-color: #3992d0;
+	top: 9.2%;
+	box-shadow: 3px 3px 6px #666; 
+}
+
+.line {
+	height: 2px;
+	width: 100%;
+	background-image: url(..images/left/line_bg.png);
+	background-repeat: repeat-x;
+}
+
+.leftsidebar_box dt {
+	padding-left: 40px;
+	padding-right: 10px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	color: #f5f5f5;
+	font-size: 14px;
+	position: relative;
+	line-height: 48px;
+	cursor: pointer;
+}
+
+.leftsidebar_box dd {
+	background-color: #317eb4;
+	padding-left: 40px;
+}
+
+.leftsidebar_box dd a {
+	color: #f5f5f5;
+	line-height: 20px;
+}
+
+.leftsidebar_box dt img {
+	position: absolute;
+	right: 10px;
+	top: 20px;
+}
+
+.system_log dt {
+	background-image: url(../images/left/system.png)
+}
+
+.custom dt {
+	background-image: url(../images/left/custom.png)
+}
+
+.channel dt {
+	background-image: url(../images/left/channel.png)
+}
+
+.app dt {
+	background-image: url(../images/left/app.png)
+}
+
+.cloud dt {
+	background-image: url(../images/left/cloud.png)
+}
+
+.syetem_management dt {
+	background-image: url(../images/left/syetem_management.png)
+}
+
+.source dt {
+	background-image: url(../images/left/source.png)
+}
+
+.statistics dt {
+	background-image: url(../images/left/statistics.png)
+}
+
+.leftsidebar_box dl dd:last-child {
+	padding-bottom: 10px;
+}
